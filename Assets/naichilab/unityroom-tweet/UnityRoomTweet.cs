@@ -6,8 +6,8 @@ namespace naichilab
 {
 	public static class UnityRoomTweet
 	{
-		const string GAMEURL = "https://beta.unityroom.com/games/{0}";
-		const string WEBGLURL = "https://beta.unityroom.com/games/{0}/webgl";
+		const string GAMEURL = "https://unityroom.com/games/{0}";
+		const string WEBGLURL = "https://unityroom.com/games/{0}/webgl";
 		const string SHAREURL = "http://twitter.com/share?";
 
 		/// <summary>
