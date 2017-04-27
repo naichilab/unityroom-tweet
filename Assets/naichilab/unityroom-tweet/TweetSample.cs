@@ -8,18 +8,17 @@ namespace naichilab
 	{
 		public void Tweet (string text)
 		{
-			naichilab.UnityRoomTweet.Tweet ("ツイートサンプルです。");
+			naichilab.UnityRoomTweet.Tweet ("unityroom-tweet-sample", "ツイートサンプルです。");
 		}
 
 		public void TweetWithHashtag ()
 		{
-			naichilab.UnityRoomTweet.Tweet ("ツイートサンプルです。", "unityroom");
+			naichilab.UnityRoomTweet.Tweet ("unityroom-tweet-sample", "ツイートサンプルです。", "unityroom");
 		}
 
 		public void TweetWithHashtags ()
 		{
-			naichilab.UnityRoomTweet.Tweet ("ツイートサンプルです。", "unityroom", "unity1week");
+			naichilab.UnityRoomTweet.Tweet ("unityroom-tweet-sample", "ツイートサンプルです。", "unityroom", "unity1week");
 		}
-
 	}
 }

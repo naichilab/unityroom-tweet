@@ -6,18 +6,25 @@ namespace naichilab
 {
 	public static class UnityRoomTweet
 	{
+		const string GAMEURL = "https://beta.unityroom.com/games/{0}";
+		const string WEBGLURL = "https://beta.unityroom.com/games/{0}/webgl";
+		const string SHAREURL = "http://twitter.com/share?";
+
 		/// <summary>
 		/// ツイートします。
 		/// </summary>
+		/// <param name="gameId">unityroomゲーム登録時に設定した固有の文字列</param>
 		/// <param name="text">本文</param>
 		/// <param name="hashtag">ハッシュタグ(#は不要) 複数指定可</param>
-		public static void Tweet (string text, params string[] hashtags)
+		public static void Tweet (string gameId, string text, params string[] hashtags)
 		{
-			const string SHAREURL = "http://twitter.com/share?";
+			string gameUrl = string.Format (GAMEURL, gameId);
+			string webglUrl = string.Format (WEBGLURL, gameId);
 
 			var sb = new StringBuilder ();
 			sb.Append (SHAREURL);
-			sb.Append ("original_referer=");
+			sb.Append ("&url=" + WWW.EscapeURL (gameUrl));
+			sb.Append ("&original_referer=" + WWW.EscapeURL (webglUrl));
 			sb.Append ("&text=" + WWW.EscapeURL (text));
 			if (hashtags.Any ()) {
 				sb.Append ("&hashtags=" + WWW.EscapeURL (string.Join (",", hashtags)));
