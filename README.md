@@ -2,6 +2,8 @@
 
 [ゲーム投稿サイト unityroom](http://unityroom.com/)専用、WebGLからツイートするためのサンプルコードです。
 
+![スクリーンショット](https://cloud.githubusercontent.com/assets/7110482/25494678/65c266f2-2bb5-11e7-989d-dbceb2c2c15d.png)
+
 [->デモ](https://unityroom.com/games/unityroom-tweet-sample/webgl)
 
 # 使い方
