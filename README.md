@@ -29,3 +29,6 @@ unityroom上でゲームを新規作成し(タイトル登録のみで構いま�
 
 ![ゲーム設定画面](https://cloud.githubusercontent.com/assets/7110482/25494312/3cbe7882-2bb4-11e7-8d49-b54ae23ba2e5.png)
 		
+# 補足
+スクリプト内で呼びだしているtwitterのURLは、本来ブラウザから自動で取得されるのですが、unityroomはiframeを使っている関係でうまく動きません。
+そのため苦肉の策としてGameIDを使ってスクリプト内でURLを構築して明示的に渡す形にしています。
