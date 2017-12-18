@@ -8,22 +8,28 @@
 
 # 使い方
 
-1. 下記スクリプトを `Assets/` 以下に入れてください。
+1. [Releases](https://github.com/naichilab/unityroom-tweet/releases)ページから、`unityroom-tweet.unitypackage` をダウンロードします。
 
-[UnityRoomTweet.cs](https://github.com/naichilab/unityroom-tweet/blob/master/Assets/naichilab/unityroom-tweet/UnityRoomTweet.cs)
+![2017-12-19 1 59 19](https://user-images.githubusercontent.com/7110482/34117857-48c3d248-e460-11e7-9d54-3633fbc851f6.png)
 
-2. ツイートしたいタイミングで下記のように呼び出してください。
+1. ダウンロードしたパッケージをunityにインポートします。
+
+![2017-12-19 2 00 38](https://user-images.githubusercontent.com/7110482/34117886-6e7120b8-e460-11e7-820a-db1e840016ad.png)
+
+> Sampleフォルダはお好みでどうぞ。
+
+1. ツイートしたいタイミングで下記のように呼び出してください。
 
 ```.cs
 //本文のみツイート
-naichilab.UnityRoomTweet.Tweet ("[YOUR-GAMEID-HERE]", "ツイートサンプルです。");
+naichilab.UnityRoomTweet.Tweet ("YOUR-GAMEID", "ツイートサンプルです。");
 //本文＋ハッシュタグツイート
-naichilab.UnityRoomTweet.Tweet ("[YOUR-GAMEID-HERE]", "ツイートサンプルです。", "unityroom");
+naichilab.UnityRoomTweet.Tweet ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom");
 //本文＋ハッシュタグ＊２ツイート
-naichilab.UnityRoomTweet.Tweet ("[YOUR-GAMEID-HERE]", "ツイートサンプルです。", "unityroom", "unity1week");
+naichilab.UnityRoomTweet.Tweet ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom", "unity1week");
 ```
 
-`[YOUR-GAMEID-HERE]` の部分には、ゲーム固有のIDが入ります。
+`YOUR-GAMEID` の部分には、ゲーム固有のIDが入ります。
 unityroom上でゲームを新規作成し(タイトル登録のみで構いません)、
 ゲーム設定画面から `その他` の設定画面を開くと確認できます。
 
