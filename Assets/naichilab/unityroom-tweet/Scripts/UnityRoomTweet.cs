@@ -11,7 +11,6 @@ namespace naichilab
         private static extern void OpenWindow(string url);
 
         const string GAMEURL = "https://unityroom.com/games/{0}";
-        const string WEBGLURL = "https://unityroom.com/games/{0}/webgl";
         const string SHAREURL = "http://twitter.com/share?";
 
         /// <summary>
@@ -23,12 +22,10 @@ namespace naichilab
         public static void Tweet(string gameId, string text, params string[] hashtags)
         {
             string gameUrl = string.Format(GAMEURL, gameId);
-            string webglUrl = string.Format(WEBGLURL, gameId);
 
             var sb = new StringBuilder();
             sb.Append(SHAREURL);
             sb.Append("&url=" + WWW.EscapeURL(gameUrl));
-            sb.Append("&original_referer=" + WWW.EscapeURL(webglUrl));
             sb.Append("&text=" + WWW.EscapeURL(text));
             if (hashtags.Any())
             {
