@@ -1,7 +1,6 @@
-﻿using System.Text;
-using System.Linq;
+﻿using System.Runtime.InteropServices;
+using naichilab.Scripts.Internal;
 using UnityEngine;
-using System.Runtime.InteropServices;
 
 namespace naichilab
 {
@@ -10,44 +9,73 @@ namespace naichilab
         [DllImport("__Internal")]
         private static extern void OpenWindow(string url);
 
-        const string GAMEURL = "https://unityroom.com/games/{0}";
-        const string SHAREURL = "http://twitter.com/share?";
+        private static YieldInstruction _currentCoroutine = null;
 
-        /// <summary>
-        /// ツイートします。
-        /// </summary>
-        /// <param name="gameId">unityroomゲーム登録時に設定した固有の文字列</param>
-        /// <param name="text">本文</param>
-        /// <param name="hashtag">ハッシュタグ(#は不要) 複数指定可</param>
-        public static void Tweet(string gameId, string text, params string[] hashtags)
+        public static void Tweet(string gameId, string text, params string[] hashTags)
         {
-            string gameUrl = string.Format(GAMEURL, gameId);
+            var tweetData = new TweetData(gameId, text, hashTags);
+            Tweet(tweetData);
+        }
 
-            var sb = new StringBuilder();
-            sb.Append(SHAREURL);
-            sb.Append("&url=" + WWW.EscapeURL(gameUrl));
-            sb.Append("&text=" + WWW.EscapeURL(text));
-            if (hashtags.Any())
+
+        public static void TweetWithImage(string gameId, string text, params string[] hashTags)
+        {
+            if (_currentCoroutine != null)
             {
-                sb.Append("&hashtags=" + WWW.EscapeURL(string.Join(",", hashtags)));
+                Debug.Log("画像アップロード中に多重呼び出しされました。");
+                return;
             }
 
+            var tweetData = new TweetData(gameId, text, hashTags);
+
+            var title = tweetData.GameUrl;
+            var desc = text;
+            _currentCoroutine = CoroutineHandler.StartStaticCoroutine(
+                GyazoUploader.CaptureScreenshotAndUpload(
+                    title
+                    , desc
+                    , (res, error) =>
+                    {
+                        if (string.IsNullOrEmpty(error))
+                        {
+                            Debug.Log("画像アップロード成功 : " + res.permalink_url);
+                            //エラーなし => ツイートする
+                            tweetData.ImageUrl = res.permalink_url;
+                            Tweet(tweetData);
+                        }
+                        else
+                        {
+                            //エラーあり
+                            Debug.LogError("画像アップロード失敗 : " + error);
+                        }
+
+                        _currentCoroutine = null;
+                    }));
+        }
+
+        public static void Tweet(ITweetData data)
+        {
+            Tweet(data.GetShareUrl());
+        }
+
+        private static void Tweet(string tweetUrl)
+        {
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
 #if UNITY_2017_2_OR_NEWER
-                OpenWindow(sb.ToString());
+                OpenWindow(tweetUrl);
 #else
-				Application.ExternalEval ("var F = 0;if (screen.height > 500) {F = Math.round((screen.height / 2) - (250));}window.open('" + sb.ToString () + "','intent','left='+Math.round((screen.width/2)-(250))+',top='+F+',width=500,height=260,personalbar=no,toolbar=no,resizable=no,scrollbars=yes');");
+				Application.ExternalEval ("var F = 0;if (screen.height > 500) {F = Math.round((screen.height / 2) - (250));}window.open('" + tweetUrl + "','intent','left='+Math.round((screen.width/2)-(250))+',top='+F+',width=500,height=260,personalbar=no,toolbar=no,resizable=no,scrollbars=yes');");
 #endif
             }
             else
             {
 #if UNITY_EDITOR
                 //URLを実行する（自動的にブラウザで開かれるはず）
-                System.Diagnostics.Process.Start(sb.ToString());
+                System.Diagnostics.Process.Start(tweetUrl);
 #else
 				Debug.Log ("WebGL以外では実行できません。");
-				Debug.Log (sb.ToString ());
+				Debug.Log (tweetUrl);
 #endif
             }
         }
