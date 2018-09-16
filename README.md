@@ -8,11 +8,11 @@
 
 # 使い方
 
-1. [Releases](https://github.com/naichilab/unityroom-tweet/releases)ページから、`unityroom-tweet.unitypackage` をダウンロードします。
+1. [Releases](https://github.com/naichilab/unityroom-tweet/releases)ページから、`unityroom-tweet.unitypackage` をダウンロードします。（最新のものでOKです。下記画像は最新ではないです。）
 
 ![スクリーンショット](https://user-images.githubusercontent.com/7110482/45599551-7c336000-ba28-11e8-9edc-877b82a4fe34.png)
 
-1. ダウンロードしたパッケージをunityにインポートします。
+1. ダウンロードしたパッケージをunityにインポートします。（最新のものは下記画像とは若干違います。）
 
 ![スクリーンショット](https://user-images.githubusercontent.com/7110482/45599656-6b83e980-ba2a-11e8-8be8-00f99b48a55e.png)
 
