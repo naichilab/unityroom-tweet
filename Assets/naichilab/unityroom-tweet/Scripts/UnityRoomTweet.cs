@@ -6,8 +6,10 @@ namespace naichilab
 {
     public static class UnityRoomTweet
     {
+#if UNITY_WEBGL
         [DllImport("__Internal")]
         private static extern void OpenWindow(string url);
+#endif
 
         private static YieldInstruction _currentCoroutine = null;
 
@@ -62,10 +64,12 @@ namespace naichilab
         {
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
+#if UNITY_WEBGL
 #if UNITY_2017_2_OR_NEWER
                 OpenWindow(tweetUrl);
 #else
 				Application.ExternalEval ("var F = 0;if (screen.height > 500) {F = Math.round((screen.height / 2) - (250));}window.open('" + tweetUrl + "','intent','left='+Math.round((screen.width/2)-(250))+',top='+F+',width=500,height=260,personalbar=no,toolbar=no,resizable=no,scrollbars=yes');");
+#endif
 #endif
             }
             else
