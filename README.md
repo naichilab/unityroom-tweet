@@ -28,11 +28,11 @@ naichilab.UnityRoomTweet.Tweet ("YOUR-GAMEID", "ツイートサンプルです�
 //本文＋ハッシュタグ＊２ツイート（画像なし）
 naichilab.UnityRoomTweet.Tweet ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom", "unity1week");
 //本文のみツイート（画像あり）
-naichilab.UnityRoomTweet.TweetWithImage ("YOUR-GAMEID", "ツイートサンプルです。");
+// (unityroomでは2019/03現在エラーとなります。) naichilab.UnityRoomTweet.TweetWithImage ("YOUR-GAMEID", "ツイートサンプルです。");
 //本文＋ハッシュタグツイート（画像あり）
-naichilab.UnityRoomTweet.TweetWithImage ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom");
+// (unityroomでは2019/03現在エラーとなります。) naichilab.UnityRoomTweet.TweetWithImage ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom");
 //本文＋ハッシュタグ＊２ツイート（画像あり）
-naichilab.UnityRoomTweet.TweetWithImage ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom", "unity1week");
+// (unityroomでは2019/03現在エラーとなります。) naichilab.UnityRoomTweet.TweetWithImage ("YOUR-GAMEID", "ツイートサンプルです。", "unityroom", "unity1week");
 ```
 
 画像ツイートをするためには後述するGyazoアクセストークンの設定が必要です。
@@ -48,6 +48,10 @@ unityroom上でゲームを新規作成し(タイトル登録のみで構いま�
 ![ゲーム設定画面](https://cloud.githubusercontent.com/assets/7110482/25494312/3cbe7882-2bb4-11e7-8d49-b54ae23ba2e5.png)
 
 ### Gyazoアクセストークンについて
+
+> 2019/03追記 unityroomからGyazoへのアップロードが失敗するようになりました。（CORSによるエラー）
+> 原因は確認中ですが、画像ツイートが必要な場合はImgur等、別の方法を使っていただくとよいかもしれません。
+> 参考 ： https://github.com/ttyyamada/TweetWithScreenShotInWebGL
 
 画像ありツイート(TweetWithImage)を行うためには、Gyazoのアクセストークンが必要です。
 
