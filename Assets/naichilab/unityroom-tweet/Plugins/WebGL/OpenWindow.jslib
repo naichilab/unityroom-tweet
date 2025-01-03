@@ -1,6 +1,6 @@
 mergeInto(LibraryManager.library, {
 	OpenWindow: function(urlPtr) {
-		var url = Pointer_stringify(urlPtr);
+		var url = UTF8ToString(urlPtr);
 		var F = 0;
 		if (screen.height > 500) {
 			F = Math.round((screen.height / 2) - (250));
